@@ -1,0 +1,76 @@
+/*
+#styleguide
+CSSファイルの末尾に自動的に適用されるグローバルスタイルファイル。
+デフォルトスタイルよりも優先度が高くなります
+
+```
+<p>特に何も指定しないときの状態</p>
+```
+
+*/
+@charset 'utf-8'
+@import '~ress/ress.css'
+
+html
+  -ms-overflow-style: none
+
+  &::-webkit-scrollbar
+    display: none
+    -webkit-appearance: none
+
+  -webkit-overflow-scrolling: touch
+  height 100%
+
+body
+  -webkit-text-size-adjust: 100%
+  text-size-adjust: 100%
+  -webkit-font-smoothing: $font-smoothing
+  -moz-osx-font-smoothing: grayscale
+  font-smoothing: $font-smoothing
+  text-rendering: $text-rendering
+  font-size: $base-font-size
+  font-family: $base-font-family
+  color: $base-font-color
+  background-color: $base-background-color
+  font-weight: bold
+
+h1, h2, h3, p, a, em
+  font-feature-settings: 'palt'
+  font-display: swap
+
+  // IE ぼやけ対応
+  _:-ms-lang(x)
+    transform: rotate(0.001deg)
+
+a
+  color: $base-font-color
+  text-decoration: none
+
+em
+  font-style: normal
+
+ul, ol
+  li
+    list-style: none
+
+img
+  width: 100%
+  height: auto
+  vertical-align: middle
+
+svg
+  fill: currentColor
+  vertical-align: middle
+
+// PC, SPでテキストの改行位置が違うときの調整class
+.br-pc
+  display: inline-block
+
+  +breakpoint(sp)
+    display: none
+
+.br-sp
+  display: none
+
+  +breakpoint(sp)
+    display: inline-block

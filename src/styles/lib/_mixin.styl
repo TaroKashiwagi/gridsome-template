@@ -1,0 +1,25 @@
+// 第一引数で基準となる画面幅のフォントサイズ、第二引数で基準となる画面幅を入力
+get_vw($size, $viewport = 375)
+  $rate = (100 / $viewport)
+  return $rate * $size * 1vw
+
+get_vh($size, $viewport = 812)
+  $rate = (100 / $viewport)
+  return $rate * $size * 1vh
+
+// font-size vw
+fz_vw($font_size = 10, $view = 375)
+  font-size: $font_size * 1px
+  font-size: get_vw($font_size, $view)
+
+// breakpoint
+breakpoint(targets)
+  $conditions = ()
+
+  for target in targets
+    push($conditions, $media-queries[target])
+
+  $condition = join(', ', $conditions)
+
+  @media $condition
+    {block}

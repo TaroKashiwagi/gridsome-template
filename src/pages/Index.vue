@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+Layout
   Header
   Footer
 </template>

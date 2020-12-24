@@ -4,42 +4,43 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-const path = require(`path`)
+const path = require("path")
+const purgecss = require("@fullhuman/postcss-purgecss")
 
 function addStyleResource (rule) {
-  rule.use([`style-resource`])
+  rule
+    .use([`style-resource`])
     .loader(`style-resources-loader`)
     .options({
-      patterns: [
-        path.resolve(__dirname, `./src/styles/global.styl`),
-      ],
+      patterns: [path.resolve(__dirname, "./src/assets/styl/*.styl")],
     })
 }
 
+const postcssPlugins = []
+const isProduction = process.env.NODE_ENV === "production"
+const isPreview = process.env.NODE_PREVIEW === "true"
+const isDevelop = process.env.NODE_ENV === "development"
+
+if(isPreview || isProduction) postcssPlugins.push(purgecss(require("./purgecss.config.js")))
+
 module.exports = {
-  siteName: ``,
-  titleTemplate: ``,
-  siteUrl: ``,
-  siteDescription: ``,
-  pathPrefix: '/',
+  siteName: "",
+  titleTemplate: "%s",
+  siteUrl: "",
+  siteDescription: "",
+  pathPrefix: isPreview || isDevelop ? "" : "",
   metadata: {
-    siteOgImage: ``,
+    siteOgImage: "",
   },
   plugins: [
-    {
-      use: `gridsome-plugin-pug`
-    }
+    { use: "gridsome-plugin-pug" },
+    { use: "gridsome-plugin-tailwindcss" }
   ],
   css: {
     loaderOptions: {
-      stylus: { preferPathResolver: `webpack` },
+      stylus: {},
       postcss: {
-        sourceMap: false,
-        plugins: [
-          require(`autoprefixer`)({
-            flexbox: `no-2009`,
-          })
-        ]
+        plugins: postcssPlugins
       }
     }
   },

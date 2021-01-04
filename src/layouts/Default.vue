@@ -1,14 +1,6 @@
 <template lang="pug">
-  .layout
-    slot
+.layout
 </template>
-
-<static-query>
-query {
-  metadata {
-  }
-}
-</static-query>
 
 <style>
 </style>

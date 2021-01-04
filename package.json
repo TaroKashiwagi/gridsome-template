@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "NODE_PREVIEW=true gridsome build",
-    "dev": "gridsome develop",
+    "release": "gridsome build",
+    "develop": "gridsome develop",
     "explore": "gridsome explore"
   },
   "dependencies": {
